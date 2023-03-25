@@ -3,15 +3,21 @@
 		<view class="analysis padding-xs flex align-center">
 			<view class="flex-sub text-center">
 				<view class="solid-bottom text-xxl padding">
-					<text class="analysis-num">{{userNum}}</text>
+					<text class="analysis-num">{{projectNum}}</text>
 				</view>
-				<view class="padding">{{$t('RegisteredUser')}}</view>
+				<view class="padding">{{$t('TaskCountThisMonth')}}</view>
 			</view>
 			<view class="flex-sub text-center">
 				<view class="solid-bottom text-xxl padding">
-					<text class="analysis-num">{{projectNum}}</text>
+					<text class="analysis-num">{{userNum}}</text>
 				</view>
-				<view class="padding">{{$t('ProjectThisMonth')}}</view>
+				<view class="padding">{{$t('FinishedTaskCountThisMonth')}}</view>
+			</view>
+			<view class="flex-sub text-center">
+				<view class="solid-bottom text-xxl padding">
+					<text class="analysis-num">{{abc}}</text>
+				</view>
+				<view class="padding">{{$t('UnFinishedTaskCountThisMonth')}}</view>
 			</view>
 		</view>
 		<ucharts-demo></ucharts-demo>
@@ -33,13 +39,14 @@
 		},
 		data() {
 			return {
-				projectNum: 199,
-				userNum: 128
+				projectNum: 100,
+				userNum: 60,
+				abc:40
 			}
 		},
 		onReady() {
 			uni.setNavigationBarTitle({
-			    title: this.$t('Statistics')
+			    title: this.$t('TaskManagement')
 			})
 			this.setNavBarColor()
 		},

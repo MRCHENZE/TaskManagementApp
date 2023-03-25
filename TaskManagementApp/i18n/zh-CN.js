@@ -1,5 +1,11 @@
 export default {
+	//new add
 	'Home':'首页',
+	'TaskManagement':'责任目标管理系统',
+	'TaskCountThisMonth':'本月任务数',
+	'FinishedTaskCountThisMonth':'已完成任务数',
+	'UnFinishedTaskCountThisMonth':'未完成任务数',
+	//new end
 	'ProjectApproval': '项目审批',
 	'ProjectAdjust': '项目调整',
 	'UserApproval': '用户审批',
@@ -7,7 +13,7 @@ export default {
 	'Project': '任务管理',
 	'ProjectDetail': '项目详细',
 	'Statistics': '统计',
-	'Profile': '我的',
+	'Profile': '用户',
 	'ToDo': '审批中心',
 	'Language': '语言',
 	'Empty': '空',

@@ -49,7 +49,7 @@
 		"selectedColor": "#4364F7",
 		"backgroundColor": "#ffffff",
 		"list": [{
-			"pagePath": "pages/index/index",
+			"pagePath": "pages/analysis/index",
 			"iconPath": "static/img/tabbar/home.png",
 			"selectedIconPath": "static/img/tabbar/homeHL.png"
 		}, {
@@ -57,7 +57,7 @@
 			"iconPath": "static/img/tabbar/project.png",
 			"selectedIconPath": "static/img/tabbar/projectHL.png"
 		}, {
-			"pagePath": "pages/analysis/index",
+			"pagePath": "pages/index/index",
 			"iconPath": "static/img/tabbar/todo.png",
 			"selectedIconPath": "static/img/tabbar/todoHL.png"
 		}, {

@@ -1,5 +1,9 @@
 export default {
 	'Home':"Home",
+	'TaskManagement':'Task Management System',
+	'TaskCountThisMonth':'Tasks In This Month',
+	'FinishedTaskCountThisMonth':'Finished Tasks In This Month',
+	'UnFinishedTaskCountThisMonth':'Unfinished Tasks In This Month',
 	'ProjectApproval': 'Project Approval',
 	'ProjectAdjust': 'Project Adjust',
 	'UserApproval': 'User Approval',
