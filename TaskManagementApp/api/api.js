@@ -31,7 +31,8 @@ export default {
 		},
 		// 项目审批列表
 		listAuditProject() {
-			return minRequest.get('/get/audit/project/list')
+			return [{'':''},{'':''}]
+			//return minRequest.get('/get/audit/project/list')
 		},
 		// 用户审批列表
 		listAuditUser() {

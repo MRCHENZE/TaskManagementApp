@@ -21,7 +21,7 @@
 			</view>
 		</view>
 		<ucharts-demo></ucharts-demo>
-		<project-time-table></project-time-table>
+		<!--<project-time-table></project-time-table>-->
 	</view>
 </template>
 

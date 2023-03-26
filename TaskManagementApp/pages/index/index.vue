@@ -30,6 +30,11 @@
 					<audit-user ref="auditUserRef"></audit-user>
 				</scroll-view>
 			</swiper-item>
+			<swiper-item>
+				<scroll-view scroll-y class="scoll-y">
+					<audit-user ref="auditUserRef"></audit-user>
+				</scroll-view>
+			</swiper-item>
 		</swiper>
 	</view>
 </template>
@@ -52,9 +57,11 @@
 			...mapGetters(['themeBgColor', 'darkMode']),
 			tabbar() {
 				return [{
-					name: this.$t('ProjectApproval')
+					name: this.$t('UnApproval')
 				}, {
-					name: this.$t('UserApproval')
+					name: this.$t('Approvaled')
+				}, {
+					name: this.$t('ViewApproval')
 				}]
 			}
 		},

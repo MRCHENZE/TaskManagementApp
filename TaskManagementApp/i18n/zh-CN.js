@@ -5,6 +5,12 @@ export default {
 	'TaskCountThisMonth':'本月任务数',
 	'FinishedTaskCountThisMonth':'已完成任务数',
 	'UnFinishedTaskCountThisMonth':'未完成任务数',
+	'UnApproval':'我的审批',
+	'Approvaled':'已审批流程',
+	'ViewApproval':'审批流程查看',
+	'TaskReport':'任务汇报',
+	'TaskTrack':'任务跟踪',
+	'UserInfo':'用户信息',
 	//new end
 	'ProjectApproval': '项目审批',
 	'ProjectAdjust': '项目调整',

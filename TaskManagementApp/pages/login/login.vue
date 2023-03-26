@@ -86,7 +86,7 @@
 				// 网络请求
 				const params = {
 					name: this.phoneData,
-					passwd: md5(this.passData)
+					passwd: this.passData//md5(this.passData)
 				}
 				this.login(params)
 			}

@@ -1,7 +1,7 @@
 <template>
 	<view class="qiun-columns">
 		<view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-			<view class="qiun-title-dot-light">柱状图</view>
+			<view class="qiun-title-dot-light">近半年完成情况</view>
 		</view>
 		<view class="qiun-charts">
 			<!--#ifdef MP-ALIPAY -->

@@ -11,7 +11,7 @@ export const demoData = {
 				"2017"
 			],
 			"series": [{
-					"name": "成交量1",
+					"name": "已完成",
 					"data": [
 						15,
 						{
@@ -25,7 +25,7 @@ export const demoData = {
 					]
 				},
 				{
-					"name": "成交量2",
+					"name": "未完成",
 					"data": [
 						30,
 						{
@@ -42,15 +42,15 @@ export const demoData = {
 		},
 		"ColumnB": {
 			"categories": [
-				"2013",
-				"2014",
-				"2015",
-				"2016",
-				"2017",
-				"2018"
+				"2023年1月",
+				"2023年2月",
+				"2023年3月",
+				"2023年4月",
+				"2023年5月",
+				"2023年6月"
 			],
 			"series": [{
-					"name": "新成交量3",
+					"name": "已完成",
 					"data": [
 						35,
 						36,
@@ -61,7 +61,7 @@ export const demoData = {
 					]
 				},
 				{
-					"name": "新成交量4",
+					"name": "未完成",
 					"data": [
 						18,
 						27,

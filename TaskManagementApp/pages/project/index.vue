@@ -7,6 +7,17 @@
 				<uni-icons :color="'#999999'" v-if="searchVal!==''" class="icon-clear" type="clear" size="22" @click="clear" />
 			</view>
 		</uni-nav-bar>
+		<uni-nav-bar :fixed="true" color="#333333" :background-color="themeBgColor" :border="false">
+			<scroll-view scroll-x scroll-with-animation :scroll-left="scrollLeft" style="z-index: 9999;">
+				<view class="tui-tabs-view tui-tabs-relative text-white" style="height:80rpx;padding:0 30rpx;top:auto" :style="{backgroundColor:themeBgColor}">
+					<view v-for="(item, index) in tabbar" :key="index" class="tui-tabs-item" style="width:50%" @tap.stop="swichNav(index)">
+						<view class="tui-tabs-title" :class="{'tui-tabs-active':currentTab==index,'tui-tabs-disabled':item.disabled}"
+						 :style="{color:currentTab==index?'#ffffb8':'#ffffff',fontSize:'28rpx',lineHeight:'28rpx',fontWeight:false && currentTab==index?'bold':'normal'}">{{item.name}}</view>
+					</view>
+					<view class="tui-tabs-slider" :style="{transform:'translateX('+scrollLeft+'px)',width:'68rpx',height:'6rpx',bottom:'0rpx',background:'#ffffb8'}"></view>
+				</view>
+			</scroll-view>
+		</uni-nav-bar>
 		<swiper :class="darkMode?'custom-dark':'custom-light'" class="tab-content" :style="{height:winHeight+'px'}">
 			<swiper-item>
 				<scroll-view scroll-y class="scoll-y">
@@ -30,12 +41,22 @@
 		},
 		computed: {
 			...mapGetters(['themeBgColor', 'darkMode']),
+			tabbar() {
+				return [{
+					name: this.$t('TaskReport')
+				}, {
+					name: this.$t('TaskTrack')
+				}]
+			}
 		},
 		data() {
 			return {
 				searchVal: '',
 				// 窗口高度
-				winHeight: ""
+				winHeight: "",
+				currentTab: 0, // 预设当前项的值
+				scrollLeft: 0, // tab标题的滚动条位置
+				searchVal: ''
 			}
 		},
 		onReady() {
@@ -67,6 +88,44 @@
 				    }
 				})
 			},
+			// swichNav(e) {
+			// 	this.currentTab = e.index
+			// },
+			// 滚动切换标签样式
+			switchTab(e) {
+				this.currentTab = e.detail.current
+				this.checkCor()
+			},
+			// 判断当前滚动超过一屏时，设置tab标题滚动条。
+			checkCorSwitchTab() {
+				if (this.currentTab > 3) {
+					// 这里距离按实际计算
+					this.scrollLeft = 300
+				} else {
+					this.scrollLeft = 0
+				}
+			},
+			checkCor() {
+				let tabsNum = this.tabbar.length
+				let padding = this.winWidth / 750 * 30
+				let width = this.winWidth - padding * 2
+				let left = (width / tabsNum - (this.winWidth / 750 * 68)) / 2 + padding
+				let scrollLeft = left
+				if (this.currentTab > 0) {
+					scrollLeft = scrollLeft + (width / tabsNum) * this.currentTab
+				}
+				this.scrollLeft = scrollLeft
+			},
+			// 点击标题切换当前页时改变样式
+			swichNav(index) {
+				let item = this.tabbar[index]
+				if (item && item.disabled) return
+				if (this.currentTab == index) {
+					return false
+				} else {
+					this.currentTab = Number(index)
+				}
+			},
 			search() {
 				this.$refs.projectListRef.queryByName(this.searchVal)
 			},
@@ -77,3 +136,72 @@
 		}
 	}
 </script>
+
+<style>
+	/* tab start */
+	.tui-tabs-view {
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		z-index: 9999;
+	}
+	
+	.tui-tabs-relative {
+		position: relative;
+	}
+	
+	.tui-tabs-fixed {
+		position: fixed;
+		left: 0;
+	}
+	
+	.tui-tabs-fixed::before,
+	.tui-tabs-relative::before {
+		content: '';
+		position: absolute;
+		border-bottom: 1rpx solid #eaeef1;
+		-webkit-transform: scaleY(0.5);
+		transform: scaleY(0.5);
+		bottom: 0;
+		right: 0;
+		left: 0;
+	}
+	
+	.tui-unlined::before {
+		border-bottom: 0 !important
+	}
+	
+	.tui-tabs-item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.tui-tabs-disabled {
+		opacity: .6;
+	}
+	
+	.tui-tabs-title {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		z-index: 2;
+	}
+	
+	.tui-tabs-active {
+		transition: all 0.15s ease-in-out;
+	}
+	
+	.tui-tabs-slider {
+		border-radius: 40rpx;
+		position: absolute;
+		left: 0;
+		transition: all 0.15s ease-in-out;
+		z-index: 0;
+	}
+	
+	/* tab end */
+</style>

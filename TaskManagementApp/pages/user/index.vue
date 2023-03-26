@@ -2,7 +2,7 @@
 	<view :class="darkMode?'custom-dark':'custom-light'" class="w-h-100">
 		<view class="cu-bar solid-bottom">
 			<view class="action">
-				<text class="cuIcon-title text-blue"></text>{{$t('BasicInfo')}}
+				<text class="cuIcon-title text-blue"></text>{{$t('UserInfo')}}
 			</view>
 		</view>
 		<view class="padding-lr padding-tb-xs">
@@ -24,9 +24,9 @@
 			</view>
 		</view>
 		<view class="padding-lr padding-tb-xs">
-			<button class="cu-btn block shadow bg-gradual-pink margin" @tap="tapSettings">{{$t('Settings')}}</button>
+			<button class="cu-btn block shadow bg-gradual-blue margin" @tap="tapSettings">{{$t('Settings')}}</button>
 			<button class="cu-btn block shadow bg-gradual-blue margin" @tap="modifyPass">{{$t('ChangePassword')}}</button>
-			<button class="cu-btn block shadow bg-gradual-orange margin" @tap="appUpgrade">{{$t('Upgrade')}}</button>
+			<!--<button class="cu-btn block shadow bg-gradual-orange margin" @tap="appUpgrade">{{$t('Upgrade')}}</button>-->
 			<button class="cu-btn block shadow bg-white margin text-red" @tap="logout">{{$t('SignOut')}}</button>
 		</view>
 		<view v-if="appInfo.version" class="text-grey text-center">

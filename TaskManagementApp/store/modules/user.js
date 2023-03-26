@@ -2,7 +2,7 @@ import Vue from 'vue'
 import _ from 'lodash'
 export default {
 	state: {
-		user: null
+		user: ''//{'id':'111','name':'admin','userName':'管理员','roleStr':'项目经理','passwd':'admin'}
 	},
 	mutations: {
 		login(state, user) {
@@ -52,7 +52,7 @@ export default {
 				})
 			} else {
 				// 如果本地没有账号信息，就提示用户必须登录
-				/*
+				
 				uni.showModal({
 					title: '未登录',
 					content: '您未登录，需要登录后才能继续',
@@ -66,7 +66,7 @@ export default {
 						}
 					}
 				})
-				*/
+				
 			}
 		},
 		login({ commit }, params) {
