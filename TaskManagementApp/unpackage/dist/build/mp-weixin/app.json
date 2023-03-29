@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/index/project/detail-project",
+    "pages/index/project/adjust-project",
+    "pages/index/user/detail-user",
+    "pages/file/file-preview",
+    "pages/project/index",
+    "pages/project/project-detail",
+    "pages/analysis/index",
+    "pages/user/index",
+    "pages/user/setting"
+  ],
+  "subPackages": [],
+  "window": {},
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#4364F7",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/analysis/index",
+        "iconPath": "static/img/tabbar/home.png",
+        "selectedIconPath": "static/img/tabbar/homeHL.png"
+      },
+      {
+        "pagePath": "pages/project/index",
+        "iconPath": "static/img/tabbar/project.png",
+        "selectedIconPath": "static/img/tabbar/projectHL.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/img/tabbar/todo.png",
+        "selectedIconPath": "static/img/tabbar/todoHL.png"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "iconPath": "static/img/tabbar/user.png",
+        "selectedIconPath": "static/img/tabbar/userHL.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

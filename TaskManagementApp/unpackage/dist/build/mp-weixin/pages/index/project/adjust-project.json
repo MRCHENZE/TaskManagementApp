@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "tui-datetime": "/components/tui/tui-datetime"
+  }
+}

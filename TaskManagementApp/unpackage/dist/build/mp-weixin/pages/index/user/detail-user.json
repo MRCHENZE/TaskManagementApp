@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "uni-tag": "/components/uni-tag/uni-tag",
+    "uni-icons": "/components/uni-icons/uni-icons",
+    "uni-goods-nav": "/components/uni-goods-nav/uni-goods-nav",
+    "audit-idea": "/pages/index/audit-idea"
+  }
+}
