@@ -174,20 +174,20 @@
             "port" : 9090,
             "disableHostCheck" : true,
             "proxy" : {
-                "/apiUA" : {
-                    "target" : "http://113.62.127.199:38080/app/mock/16",
+                "/taskmanagement" : {
+                    "target" : "http://1.15.241.188:8069",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {
-                        "^/apiUA" : ""
+                        "^/taskmanagement" : ""
                     }
                 }
             }
         },
-        "title" : "uniapp-admin",
-        "router" : {
-            "mode" : "hash",
-            "base" : "/ua"
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : false
+            }
         }
     },
     "vueVersion" : "2",

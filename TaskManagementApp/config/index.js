@@ -1,7 +1,7 @@
 /**
  * ip地址或域名
  */
-const ipAddress = 'http://113.62.127.199:38080/app/mock/16'
+const ipAddress = 'http://1.15.241.188:8069/'
 // 文件访问地址
 const fileAddr = 'http://localhost:8082/fileUpload/'
 /**

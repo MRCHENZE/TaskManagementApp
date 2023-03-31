@@ -185,10 +185,10 @@
 				uni.showLoading({
 					title: '正在查询数据...'
 				})
-				const res = await this.$minApi.listAuditProject()
-				if (res.ok()) {
-					this.cardList = res.data
-				}
+				//const res = await this.$minApi.listAuditProject()
+				//if (res.ok()) {
+				//	this.cardList = res.data
+				//}
 				uni.hideLoading()
 			},
 			updateQuery() {

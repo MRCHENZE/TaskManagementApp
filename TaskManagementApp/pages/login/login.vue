@@ -74,7 +74,7 @@
 					});
 					return;
 				}
-				if (this.passData.length < 5) {
+				if (this.passData.length < 0) {
 					uni.showToast({
 						icon: 'none',
 						position: 'bottom',
@@ -98,20 +98,9 @@
 	@import url("../../components/watch-login/css/icon.css");
 	@import url("./css/main.css");
 
-	.login-bg {
-		/*width: 100%;100%;
-		background-color: skyblue;*/
-	}
-
 	.login-bg .content .header uni-image {
-		width: 660rpx;
+		width: 660rpx; /*需要在微信中修改*/
 		height: 120rpx;
 	}
-
-	/* .login-bg .content .header {
-		width: 241rpx;
-		height: 241rpx;
-		background-size: 241rpx;
-		background-image: url('/static/img/logo.png');
-	} */
+	
 </style>

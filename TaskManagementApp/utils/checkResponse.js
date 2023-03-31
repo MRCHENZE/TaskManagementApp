@@ -127,7 +127,7 @@ export const checkStatus = (response = {}) => {
  * @returns
  */
 export const checkLogin = (response) => {
-	let { code } = response
+	let { code } = response.result
 	if (code === 401) {
 		goLoginDebounce()
 	}
@@ -140,20 +140,20 @@ export const checkLogin = (response) => {
  * @param {*} result
  * @returns
  */
-export const checkResult = (result) => {
-	if (!result.isOk) {
-		showErrorMsg(result.errMsg)
+export const checkResult = (result1) => {
+	if (result1) {
+		showErrorMsg(result1.errMsg)
 	}
-	let { code } = result
-	result.ok = function() {
+	let { code } = result1.result
+	result1.ok = function() {
 		return false
 	}
 	if (code === 200) {
-		result.ok = function() {
+		result1.ok = function() {
 			return true
 		}
 	} else {
-		showErrorMsg(result.msg || HttpErrorCode[code])
+		showErrorMsg(result1.msg || HttpErrorCode[code])
 	}
-	return result
+	return result1
 }

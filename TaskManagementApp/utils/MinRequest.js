@@ -50,7 +50,12 @@ class MinRequest {
 	}
 
 	request(options = {}) {
-		options.baseURL = options.baseURL || this[config].baseURL
+		//options.baseURL = options.baseURL || this[config].baseURL 
+		var BASE_URL = "http://1.15.241.188:8069";    //不是h5默认这个地址
+		// #ifdef H5
+		BASE_URL = '/taskmanagement';    //H5下将地址修改为/dpc
+		// #endif
+		options.baseURL = BASE_URL
 		options.dataType = options.dataType || this[config].dataType
 		options.url = MinRequest[isCompleteURL](options.url) ? options.url : (options.baseURL + options.url)
 		options.data = options.data

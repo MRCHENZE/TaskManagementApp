@@ -24,18 +24,29 @@ export default {
 	// 这里统一管理api请求
 	apis: {
 		login(params) {
-			return minRequest.post('/post/user/login', params)
+
+			if (params){
+				return minRequest.post('/taskmanagement/getaccount',params)
+			}
+			else {
+				const param = {
+					name: 'none',
+					passwd:'1'
+				}
+				return  minRequest.post('/taskmanagement/getaccount',param)
+			}
 		},
 		userPwdModify(params) {
 			return minRequest.post('/post/user/pwd/modify', params)
 		},
 		// 项目审批列表
 		listAuditProject() {
-			return [{'':''},{'':''}]
-			//return minRequest.get('/get/audit/project/list')
+			//return [{'':''},{'':''}]
+			return minRequest.get('/get/audit/project/list')
 		},
 		// 用户审批列表
 		listAuditUser() {
+			//return [{'':''},{'':''}]
 			return minRequest.get('/get/audit/user/list')
 		}
 	}
