@@ -5,53 +5,22 @@
 		 :fixed="false">
 			<view class="mycard">
 				<view v-for="item in cardList" :key="item.id" class="card-item">
-					<uni-card is-full :title="item.projectType" is-shadow note="true" :extra="item.createTime" :thumbnail="`/static/img/project/${formatProjectType(item.projectType)}`"
+					<uni-card is-full :title="item.projectType" is-shadow note="" :extra="item.year + item.month" :thumbnail="`/static/img/project/${formatProjectType(item.projectType)}`"
 					 @tapHeader="clickCard(item)">
 						<view class="audit-card-content">
 							<view class="uni-flex uni-row" @tap="clickCard(item)">
-								<view class="flex-item-20">项目名称</view>
-								<view class="flex-item-80">{{item.projectName}}</view>
+								<view class="flex-item-20">单据编号</view>
+								<view class="flex-item-80">{{item.billcode}}</view>
 							</view>
 							<view class="uni-flex uni-row" @tap="clickCard(item)">
-								<view class="flex-item-20">项目类型</view>
-								<view class="flex-item-80">{{item.projectType}}</view>
+								<view class="flex-item-20">被考核人</view>
+								<view class="flex-item-80">{{item.checkedman}}</view>
 							</view>
 							<view class="uni-flex uni-row" @tap="clickCard(item)">
-								<view class="flex-item-20">所在区域</view>
-								<view class="flex-item-80">{{item.area}}</view>
-							</view>
-							<view class="uni-flex uni-row" @tap="clickCard(item)">
-								<view class="flex-item-20">项目地址</view>
-								<view class="flex-item-80">{{item.addr}}</view>
-							</view>
-							<view class="uni-flex uni-row" @tap="clickCard(item)">
-								<view class="flex-item-20">立项人</view>
-								<view class="flex-item-80">{{item.createUser}}</view>
-							</view>
-							<view class="uni-flex uni-row" @tap="clickCard(item)">
-								<view class="flex-item-20">审核状态</view>
-								<view class="flex-item-80">
-									<uni-tag size="small" :text="formatAuditStatus(item.auditStatus).text" :type="formatAuditStatus(item.auditStatus).color"
-									 :circle="true"></uni-tag>
-								</view>
-							</view>
-							<view class="uni-flex uni-row">
-								<view class="flex-item-20">附件</view>
-								<view class="flex-item-80">
-									<view v-for="atta in item.attachment" :key="atta.url" @tap="filePreview(atta)">
-										<uni-icons color="#007aff" type="paperclip" size="22"></uni-icons><text>{{atta.name}}</text>
-									</view>
-								</view>
+								<view class="flex-item-20">考核任务</view>
+								<view class="flex-item-80">{{item.taskinfo}}</view>
 							</view>
 						</view>
-
-						<template v-slot:footer>
-							<view class="footer-box">
-								<view class="iconfont icontongguo my-iconfont text-green" @tap="passClick(item)">通过</view>
-								<view class="iconfont iconweibiaoti522 my-iconfont text-red" @tap="unPassClick(item)">拒绝</view>
-								<view class="my-iconfont text-blue" @tap="adjustClick(item)">调整</view>
-							</view>
-						</template>
 					</uni-card>
 				</view>
 			</view>
@@ -133,32 +102,121 @@
 					return
 				}
 
-				// 此时mescroll会携带page的参数:
-				let pageNum = mescroll.num // 页码, 默认从1开始
-				let pageSize = mescroll.size // 页长, 默认每页10条
+				let data = [
+					{
+						id:'1',
+						year:'2022年',
+						month:'10月',
+						billcode:'HB20221215002',
+						projectType:'任务汇报单',
+						xiangmu:'人力资源部',
+						taskinfo:'完善所有人员的离职手续',
+						aduitor:'杨星',
+						checkedman:'亢鹏利',
+						auditStatus:'2',
+						score:30,
+						scored:15,
+						actualscore:0,
+						attachment:[{
+							name:'测试',
+							url:'ceshi'
+						}]
+					},
+					{
+						id:'2',
+						year:'2022年',
+						month:'10月',
+						billcode:'TB20221215002',
+						projectType:'任务填报单',
+						xiangmu:'宜川县职业教育中心新校区建设项目',
+						taskinfo:'督促12345学习',
+						aduitor:'杨星',
+						checkedman:'亢鹏利',
+						auditStatus:'2',
+						score:10,
+						scored:0,
+						actualscore:0,
+						attachment:[{
+							name:'测试',
+							url:'ceshi',
+							
+						}]
+					},
+					{
+						id:'3',
+						year:'2022年',
+						month:'10月',
+						billcode:'TB20221215002',
+						projectType:'任务填报单',
+						xiangmu:'宜川县职业教育中心新校区建设项目',
+						taskinfo:'监督项目管理人员12345学习',
+						aduitor:'杨星',
+						checkedman:'亢鹏利',
+						auditStatus:'2',
+						score:20,
+						scored:0,
+						actualscore:0,
+						attachment:[{
+							name:'测试',
+							url:'ceshi'
+						}]
+					},
+					{
+						id:'4',
+						year:'2022年',
+						month:'10月',
+						billcode:'TB20221215002',
+						projectType:'任务填报单',
+						xiangmu:'宜川县职业教育中心新校区建设项目',
+						taskinfo:'监督项目管理人员12345学习',
+						aduitor:'杨星',
+						checkedman:'亢鹏利',
+						auditStatus:'2',
+						score:20,
+						scored:0,
+						actualscore:0,
+						attachment:[{
+							name:'测试',
+							url:'ceshi'
+						}]
+					},
+					{
+						id:'5',
+						year:'2022年',
+						month:'10月',
+						billcode:'TB20221215002',
+						projectType:'任务填报单',
+						xiangmu:'宜川县职业教育中心新校区建设项目',
+						taskinfo:'监督项目管理人员12345学习',
+						aduitor:'杨星',
+						checkedman:'亢鹏利',
+						auditStatus:'2',
+						score:20,
+						scored:0,
+						actualscore:0,
+						attachment:[{
+							name:'测试',
+							url:'ceshi'
+						}]
+					}
+				]
+				// 接口返回的当前页数据列表 (数组)
+				let curPageData = data
+				// 接口返回的总页数 (比如列表有26个数据,每页10条,共3页; 则totalPage值为3)
+				let totalPage = data.length
+				// 接口返回的总数据量(比如列表有26个数据,每页10条,共3页; 则totalSize值为26)
+				let totalSize = data.length
+				// 接口返回的是否有下一页 (true/false)
+				// let hasNext = res.hasNextPage
 
-				this.$minApi.listAuditProject({}, pageNum, pageSize).then(res => {
-					// 接口返回的当前页数据列表 (数组)
-					let curPageData = res.data
-					// 接口返回的总页数 (比如列表有26个数据,每页10条,共3页; 则totalPage值为3)
-					let totalPage = res.data.length
-					// 接口返回的总数据量(比如列表有26个数据,每页10条,共3页; 则totalSize值为26)
-					let totalSize = res.data.length
-					// 接口返回的是否有下一页 (true/false)
-					// let hasNext = res.hasNextPage
+				if (mescroll.num == 1) this.cardList = [] //如果是第一页需手动置空列表
+				this.cardList = this.cardList.concat(curPageData) //追加新数据
 
-					if (mescroll.num == 1) this.cardList = [] //如果是第一页需手动置空列表
-					this.cardList = this.cardList.concat(curPageData) //追加新数据
-
-					// 成功隐藏下拉加载状态
-					// 方法一(推荐): 后台接口有返回列表的总页数 totalPage
-					mescroll.endByPage(curPageData.length, totalPage)
-					this.$nextTick(() => {
-						mescroll.endSuccess(curPageData.length)
-					})
-				}).catch(() => {
-					// 失败隐藏下拉加载状态
-					mescroll.endErr()
+				// 成功隐藏下拉加载状态
+				// 方法一(推荐): 后台接口有返回列表的总页数 totalPage
+				mescroll.endByPage(curPageData.length, totalPage)
+				this.$nextTick(() => {
+					mescroll.endSuccess(curPageData.length)
 				})
 			},
 			clickCard(item) {

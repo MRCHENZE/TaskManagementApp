@@ -39,12 +39,12 @@ export const formatProjectType = pt => {
 	if (!pt) {
 		return ''
 	}
-	if (pt.indexOf('工程施工') !== -1) {
-		return 'build.png'
-	} else if (pt.indexOf('采购') !== -1) {
-		return 'purchase.png'
-	} else if (pt.indexOf('软件研发') !== -1) {
-		return 'asset.png'
+	if (pt.indexOf('任务填报单') !== -1) {
+		return '任务填报单.png'
+	} else if (pt.indexOf('任务汇报单') !== -1) {
+		return '任务汇报单.png'
+	} else if (pt.indexOf('任务调整单') !== -1) {
+		return '任务调整单.png'
 	} else if (pt.indexOf('系统集成') !== -1) {
 		return 'land.png'
 	}
@@ -76,21 +76,21 @@ export const formatAuditStatus = status => {
 		case '0':
 			;
 			(() => {
-				text = '不通过'
+				text = '审批不通过'
 				color = 'error'
 			})()
 			break
 		case '1':
 			;
 			(() => {
-				text = '通过'
+				text = '审批通过'
 				color = 'success'
 			})()
 			break
 		default:
 			;
 			(() => {
-				text = '待审核'
+				text = '审批中'
 				color = 'warning'
 			})()
 			break

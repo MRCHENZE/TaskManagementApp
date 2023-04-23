@@ -4,23 +4,25 @@
 		<view class="place-detail">
 			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">审核状态</view>
-					<view class="flex-item-70">
-						<uni-tag size="small" :text="formatAuditStatus(item.manageStatus).text" :type="formatAuditStatus(item.manageStatus).color"
-						 :circle="true"></uni-tag>
-					</view>
+					<view class="flex-item-30">单据类型</view>
+					<view class="flex-item-70">{{item.projectType}}</view>
 				</view>
 			</view>
 			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">附件</view>
-					<view class="flex-item-70">
-						<view v-for="atta in item.attachment" :key="atta.url" @tap="filePreview(atta)">
-							<uni-icons color="#007aff" type="paperclip" size="22"></uni-icons><text>{{atta.name}}</text>
-						</view>
-					</view>
+					<view class="flex-item-30">单据编号</view>
+					<view class="flex-item-70">{{item.billcode}}</view>
 				</view>
 			</view>
+			<view class="padding-lr padding-tb-xs detail-item">
+				<view class="uni-flex uni-row">
+					<view class="flex-item-30">审核状态</view>
+					<view class="flex-item-70">
+						<uni-tag size="small" :text="formatAuditStatus(item.auditStatus).text" :type="formatAuditStatus(item.auditStatus).color"
+						 :circle="true"></uni-tag>
+					</view>
+				</view>
+			</view>		
 			<view class="padding-lr padding-tb-xs detail-item" v-if="item.opinionList && item.opinionList.length > 0">
 				<view class="uni-flex uni-row">
 					<view class="uni-timeline">
@@ -43,103 +45,61 @@
 			</view>
 			<view class="cu-bar detail-item solid-bottom">
 				<view class="action">
-					<text class="cuIcon-title text-blue"></text>项目信息
+					<text class="cuIcon-card text-blue"></text>任务信息
 				</view>
 			</view>
 			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">项目名称</view>
-					<view class="flex-item-70">{{item.projectName}}</view>
+					<view class="flex-item-30">项目</view>
+					<view class="flex-item-70">{{item.xiangmu}}</view>
 				</view>
 			</view>
 			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">项目编号</view>
-					<view class="flex-item-70">{{item.projectNo}}</view>
+					<view class="flex-item-30">年份</view>
+					<view class="flex-item-70">{{item.year}}</view>
 				</view>
 			</view>
 			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">项目类别</view>
-					<view class="flex-item-70">{{item.projectType}}</view>
+					<view class="flex-item-30">月份</view>
+					<view class="flex-item-70">{{item.month}}</view>
 				</view>
 			</view>
 			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">项目区域</view>
-					<view class="flex-item-70">{{item.area}}</view>
+					<view class="flex-item-30">被考核人</view>
+					<view class="flex-item-70">{{item.checkedman}}</view>
+				</view>
+			</view>
+			<view class="padding-lr padding-tb-xs detail-item">
+				<view class="uni-flex uni-row">
+					<view class="flex-item-30">考核任务</view>
+					<view class="flex-item-70">{{item.taskinfo}}</view>
 				</view>
 			</view>
 
 			<view class="cu-bar detail-item solid-bottom">
 				<view class="action">
-					<text class="cuIcon-title text-blue"></text>立项信息
+					<text class="cuIcon-rankfill text-blue"></text>得分信息
 				</view>
 			</view>
 			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">立项人</view>
-					<view class="flex-item-70">{{item.createUser}}</view>
+					<view class="flex-item-30">分值</view>
+					<view class="flex-item-70">{{item.score}}</view>
 				</view>
 			</view>
 			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">立项时间</view>
-					<view class="flex-item-70">{{item.createTime}}</view>
+					<view class="flex-item-30">已打分值</view>
+					<view class="flex-item-70">{{item.scored}}</view>
 				</view>
 			</view>
 			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">预计开始时间</view>
-					<view class="flex-item-70">{{item.startTime}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs detail-item">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">预计结束时间</view>
-					<view class="flex-item-70">{{item.endTime}}</view>
-				</view>
-			</view>
-
-			<view class="cu-bar detail-item solid-bottom">
-				<view class="action">
-					<text class="cuIcon-title text-blue"></text>其他信息
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs detail-item">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">业主单位</view>
-					<view class="flex-item-70">{{item.ownerUnit}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs detail-item">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">建设单位</view>
-					<view class="flex-item-70">{{item.buildUnit}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs detail-item">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">项目紧急程度</view>
-					<view class="flex-item-70">{{item.agencyDegree}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs detail-item">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">人力投入情况</view>
-					<view class="flex-item-70">{{item.human}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs detail-item">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">甲方资金来源</view>
-					<view class="flex-item-70">{{item.aFoundSource}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs detail-item">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">项目描述</view>
-					<view class="flex-item-70">{{item.descript}}</view>
+					<view class="flex-item-30">实际得分</view>
+					<view class="flex-item-70">{{item.actualscore}}</view>
 				</view>
 			</view>
 		</view>
@@ -176,7 +136,7 @@
 				item: {},
 				options: [{
 					icon: '/static/img/edit.png',
-					text: '调整'
+					text: '打分'
 				}],
 				buttonGroup: [{
 						text: '拒绝',
@@ -220,7 +180,7 @@
 				// 	title: `点击${e.content.text}`,
 				// 	icon: 'none'
 				// })
-				if (e.content.text === '调整') {
+				if (e.content.text === '打分') {
 					uni.navigateTo({
 						url: '/pages/index/project/adjust-project?data=' + JSON.stringify(this.item)
 					})

@@ -32,7 +32,10 @@
 			"path": "pages/project/index"
 		},
 		{
-			"path": "pages/project/project-detail"
+			"path": "pages/project/report/project-detail"
+		},
+		{
+			"path": "pages/project/report/project-list"
 		},
 		{
 			"path": "pages/analysis/index"

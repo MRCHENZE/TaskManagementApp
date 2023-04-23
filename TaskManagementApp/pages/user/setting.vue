@@ -127,7 +127,7 @@
 				this.currentTheme = tmp[0].text
 			},
 			getCurrentLang() {
-				this.currentLang = uni.getStorageSync('_lang').data || 'System'
+				this.currentLang = uni.getStorageSync('_lang').data || 'zh-CN'
 			},
 			tapLang() {
 				this.modalLang = 'show'

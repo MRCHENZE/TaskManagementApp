@@ -2,41 +2,13 @@
 <template>
 	<view>
 		<form>
-			<view class="cu-form-group margin-top">
-				<view class="title">立项时间</view>
-
-				<view class="time-content" @tap="showApplyTime">
-					<view class="my-uni-input" v-if="projectItem.applyTime">{{projectItem.applyTime}}</view>
-					<view v-else class="placeholder">{{placeholder}} </view>
-				</view>
-				<tui-datetime ref="applyDateTimeRef" :type="1" :startYear="startYear" :endYear="endYear" :cancelColor="cancelColor"
-				 :color="color" :setDateTime="projectItem.applyTime" @confirm="getApplyTime"></tui-datetime>
+			<view class="cu-form-group">
+				<view class="title">分值</view>
+				<input class="uni-input" type="digit" value="30" placeholder="" />
 			</view>
 			<view class="cu-form-group">
-				<view class="title">创建时间</view>
-
-				<view class="time-content" @tap="showCreateTime">
-					<view class="my-uni-input" v-if="projectItem.createTime">{{projectItem.createTime}}</view>
-					<view v-else class="placeholder">{{placeholder}} </view>
-				</view>
-				<tui-datetime ref="createDateTimeRef" :type="1" :startYear="startYear" :endYear="endYear" :cancelColor="cancelColor"
-				 :color="color" :setDateTime="projectItem.createTime" @confirm="getCreateTime"></tui-datetime>
-			</view>
-			<view class="cu-form-group">
-				<view class="title">所在区域</view>
-				<picker @change="areaPickerChange" v-model="areaIndex" :value="areaIndex" :range="areaList">
-					<view class="picker">
-						{{areaIndex>-1?areaList[areaIndex]:'请选择所在区域'}}
-					</view>
-				</picker>
-			</view>
-			<view class="cu-form-group">
-				<view class="title">项目地址</view>
-				<picker @change="addrPickerChange" v-model="addrIndex" :value="addrIndex" :range="addrList">
-					<view class="picker">
-						{{addrIndex>-1?addrList[addrIndex]:'请选择项目地址'}}
-					</view>
-				</picker>
+				<view class="title">得分</view>
+				<input class="uni-input" type="digit" value ="0" placeholder="" />
 			</view>
 		</form>
 		<view class="flex">
@@ -44,7 +16,7 @@
 				<button class="cu-btn block shadow bg-white margin-tb-sm lg" @tap="cancelClick">取消</button>
 			</view>
 			<view class="flex-sub margin-sm">
-				<button class="cu-btn block shadow bg-blue margin-tb-sm lg" @tap="saveClick">保存</button>
+				<button class="cu-btn block shadow bg-blue margin-tb-sm lg" @tap="saveClick">确认</button>
 			</view>
 		</view>
 	</view>

@@ -1,27 +1,29 @@
-<!-- 单位明细 -->
+<!-- 项目审批明细 -->
 <template>
 	<view :class="darkMode?'custom-dark':'custom-light'">
 		<view class="place-detail">
-			<view class="padding-lr padding-tb-xs bg-white">
+			<view class="padding-lr padding-tb-xs detail-item">
+				<view class="uni-flex uni-row">
+					<view class="flex-item-30">单据类型</view>
+					<view class="flex-item-70">{{item.projectType}}</view>
+				</view>
+			</view>
+			<view class="padding-lr padding-tb-xs detail-item">
+				<view class="uni-flex uni-row">
+					<view class="flex-item-30">单据编号</view>
+					<view class="flex-item-70">{{item.billcode}}</view>
+				</view>
+			</view>
+			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
 					<view class="flex-item-30">审核状态</view>
 					<view class="flex-item-70">
-						<uni-tag size="small" :text="formatAuditStatus(item.status).text" :type="formatAuditStatus(item.status).color"
+						<uni-tag size="small" :text="formatAuditStatus(item.auditStatus).text" :type="formatAuditStatus(item.auditStatus).color"
 						 :circle="true"></uni-tag>
 					</view>
 				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">附件</view>
-					<view class="flex-item-70">
-						<view v-for="atta in item.attachment" :key="atta.url" @tap="filePreview(atta)">
-							<uni-icons color="#007aff" type="paperclip" size="22"></uni-icons><text>{{atta.name}}</text>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs bg-white" v-if="item.opinionList && item.opinionList.length > 0">
+			</view>		
+			<view class="padding-lr padding-tb-xs detail-item" v-if="item.opinionList && item.opinionList.length > 0">
 				<view class="uni-flex uni-row">
 					<view class="uni-timeline">
 						<!-- opIndex===0?'uni-timeline-first-item':(opIndex===(item.opinionList.length-1)?'uni-timeline-last-item':'') -->
@@ -41,148 +43,43 @@
 					</view>
 				</view>
 			</view>
-			<view class="cu-bar bg-white solid-bottom">
-				<view class="action">
-					<text class="cuIcon-title text-blue"></text>基本信息
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
+			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">单位名称</view>
-					<view class="flex-item-70">{{item.orgName}}</view>
+					<view class="flex-item-30">项目</view>
+					<view class="flex-item-70">{{item.xiangmu}}</view>
 				</view>
 			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
+			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">组织机构代码</view>
-					<view class="flex-item-70">{{item.orgNo}}</view>
+					<view class="flex-item-30">年份</view>
+					<view class="flex-item-70">{{item.year}}</view>
 				</view>
 			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
+			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">单位类别</view>
-					<view class="flex-item-70">{{item.orgType}}</view>
+					<view class="flex-item-30">月份</view>
+					<view class="flex-item-70">{{item.month}}</view>
 				</view>
 			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
+			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">法定代表人</view>
-					<view class="flex-item-70">{{item.orgRepresent}}</view>
+					<view class="flex-item-30">被考核人</view>
+					<view class="flex-item-70">{{item.checkedman}}</view>
 				</view>
 			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
+			<view class="padding-lr padding-tb-xs detail-item">
 				<view class="uni-flex uni-row">
-					<view class="flex-item-30">注册地</view>
-					<view class="flex-item-70">{{item.orgRegAddress}}</view>
+					<view class="flex-item-30">考核任务</view>
+					<view class="flex-item-70">{{item.taskinfo}}</view>
 				</view>
 			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">注册资本(万元)</view>
-					<view class="flex-item-70">{{item.regCapital}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">联系人</view>
-					<view class="flex-item-70">{{item.orgContact}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">联系人电话</view>
-					<view class="flex-item-70">{{item.orgContactPhone}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">提交时间</view>
-					<view class="flex-item-70">{{item.commitTime}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">注册时间</view>
-					<view class="flex-item-70">{{item.createTime}}</view>
-				</view>
-			</view>
-
-			<view class="cu-bar bg-white solid-bottom">
-				<view class="action">
-					<text class="cuIcon-title text-blue"></text>银行账号信息
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">开户银行</view>
-					<view class="flex-item-70">{{item.basicBank}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">开户支行</view>
-					<view class="flex-item-70">{{item.basicBranchBank}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">开户账号</view>
-					<view class="flex-item-70">{{item.basicAccountNo}}</view>
-				</view>
-			</view>
-			<view class="padding-lr padding-tb-xs bg-white">
-				<view class="uni-flex uni-row">
-					<view class="flex-item-30">银行账户名称</view>
-					<view class="flex-item-70">{{item.basicAccountName}}</view>
-				</view>
-			</view>
-
-			<view class="cu-bar bg-white solid-bottom">
-				<view class="action">
-					<text class="cuIcon-title text-blue"></text>单位员工
-				</view>
-			</view>
-			<view class="margin-top-sm" v-for="contactItem in item.orgContactList" :key="contactItem.id">
-				<view class="padding-lr padding-tb-xs bg-white">
-					<view class="uni-flex uni-row">
-						<view class="flex-item-30">姓名</view>
-						<view class="flex-item-70">{{contactItem.name}}</view>
-					</view>
-				</view>
-				<view class="padding-lr padding-tb-xs bg-white">
-					<view class="uni-flex uni-row">
-						<view class="flex-item-30">身份证号码</view>
-						<view class="flex-item-70">{{contactItem.idCard}}</view>
-					</view>
-				</view>
-				<view class="padding-lr padding-tb-xs bg-white">
-					<view class="uni-flex uni-row">
-						<view class="flex-item-30">电话</view>
-						<view class="flex-item-70">{{contactItem.phone}}</view>
-					</view>
-				</view>
-				<view class="padding-lr padding-tb-xs bg-white">
-					<view class="uni-flex uni-row">
-						<view class="flex-item-30">详细地址</view>
-						<view class="flex-item-70">{{contactItem.address}}</view>
-					</view>
-				</view>
-				<view class="padding-lr padding-tb-xs bg-white">
-					<view class="uni-flex uni-row">
-						<view class="flex-item-30">附件</view>
-						<view class="flex-item-70">
-							<view v-for="atta in contactItem.attachment" :key="atta.url" @tap="filePreview(atta)">
-								<uni-icons color="#007aff" type="paperclip" size="22"></uni-icons><text>{{atta.name}}</text>
-							</view>
-						</view>
-					</view>
-				</view>
+			<view>
+				<uni-section title="审批流程" type="line" padding>
+					<uni-steps :options="list2" active-color="#007AFF" :active="count"  direction="column" />
+				</uni-section>
 			</view>
 		</view>
-		<view class="goods-carts">
-			<uni-goods-nav :options="options" :button-group="buttonGroup" @click="onClick" @buttonClick="buttonClick" />
-		</view>
-		<audit-idea ref="popupAuditIdeaRef" :isPass="isPass" @updateQuery="updateQuery"></audit-idea>
+
 	</view>
 </template>
 
@@ -192,9 +89,10 @@
 	import uniTag from '@/components/uni-tag/uni-tag.vue'
 	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	import auditIdea from '@/pages/index/audit-idea.vue'
+	import UniSteps from '@/components/uni-steps/uni-steps.vue'
+	import UniSection from '@/components/uni-section/uni-section.vue'
 	import {
 		filePreview,
-		formatArr,
 		formatAuditStatus
 	} from '@/utils/index.js'
 	export default {
@@ -202,16 +100,24 @@
 			uniGoodsNav,
 			uniTag,
 			uniIcons,
-			auditIdea
+			auditIdea,
+			UniSteps,
+			UniSection
 		},
 		computed: {
 			...mapGetters(['themeBgColor', 'darkMode']),
+			count(){
+				return this.list2.length-1
+			}
 		},
 		data() {
 			return {
 				isPass: false,
 				item: {},
-				options: [],
+				options: [{
+					icon: '/static/img/edit.png',
+					text: '打分'
+				}],
 				buttonGroup: [{
 						text: '拒绝',
 						backgroundColor: '#e54d42',
@@ -222,12 +128,23 @@
 						backgroundColor: '#39b54a',
 						color: '#fff'
 					}
-				]
+				],
+				active:1,
+				list2: [{
+					title: '张三',
+					desc: '2023-03-01'
+				}, {
+					title: '李四',
+					desc: '2023-03-02'
+				}, {
+					title: '杨星',
+					desc: '2023-03-03'
+				}]
 			}
 		},
 		onReady() {
 			uni.setNavigationBarTitle({
-			    title: this.$t('UserApproval')
+			    title: this.$t('ProjectApproval')
 			})
 			// navBar-bg-color
 			uni.setNavigationBarColor({
@@ -249,7 +166,17 @@
 		methods: {
 			filePreview,
 			formatAuditStatus,
-			onClick(e) {},
+			onClick(e) {
+				// uni.showToast({
+				// 	title: `点击${e.content.text}`,
+				// 	icon: 'none'
+				// })
+				if (e.content.text === '打分') {
+					uni.navigateTo({
+						url: '/pages/index/project/adjust-project?data=' + JSON.stringify(this.item)
+					})
+				}
+			},
 			buttonClick(e) {
 				if (e.index === 0) {
 					this.isPass = false
@@ -284,4 +211,26 @@
 	/* .place-detail .uni-row {
 		margin: 5rpx 0;
 	} */
+</style>
+
+<style lang="scss">
+	.status-btn {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		height: 92rpx;
+		margin: 30rpx;
+		background-color: #007AFF;
+	}
+
+	.example-body {
+		/* #ifndef APP-NVUE */
+		display: block;
+		/* #endif */
+		padding: 15px;
+		flex-direction: row;
+	}
 </style>

@@ -12,8 +12,8 @@ export default {
 	'TaskTrack':'任务跟踪',
 	'UserInfo':'用户信息',
 	//new end
-	'ProjectApproval': '项目审批',
-	'ProjectAdjust': '项目调整',
+	'ProjectApproval': '审批信息',
+	'ProjectAdjust': '评价得分',
 	'UserApproval': '用户审批',
 	'FilePreview': '文件预览',
 	'Project': '任务管理',

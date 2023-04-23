@@ -1,12 +1,12 @@
 <template>
 	<view>
-		<uni-nav-bar :fixed="true" color="#333333" :background-color="themeBgColor" :border="false">
+		<!--<uni-nav-bar :fixed="true" color="#333333" :background-color="themeBgColor" :border="false">
 			<view class="input-view">
 				<uni-icons type="search" size="22" color="#666666" />
 				<input v-model="searchVal" confirm-type="search" class="input" type="text" placeholder="搜索项目/机构" @confirm="search">
 				<uni-icons :color="'#999999'" v-if="searchVal!==''" class="icon-clear" type="clear" size="22" @click="clear" />
 			</view>
-		</uni-nav-bar>
+		</uni-nav-bar>-->
 
 		<uni-nav-bar :fixed="true" color="#333333" :background-color="themeBgColor" :border="false">
 			<scroll-view scroll-x scroll-with-animation :scroll-left="scrollLeft" style="z-index: 9999;">
@@ -30,11 +30,11 @@
 					<audit-user ref="auditUserRef"></audit-user>
 				</scroll-view>
 			</swiper-item>
-			<swiper-item>
+			<!--<swiper-item>
 				<scroll-view scroll-y class="scoll-y">
-					<audit-user ref="auditUserRef"></audit-user>
+					<audit-process ref="auditUserRef"></audit-process>
 				</scroll-view>
-			</swiper-item>
+			</swiper-item>-->
 		</swiper>
 	</view>
 </template>
@@ -45,13 +45,15 @@
 	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
 	import auditUser from './user/audit-user'
 	import auditProject from './project/audit-project'
+	import auditProcess from './process/audit-process'
 	import md5 from '@/common/lib/md5.min.js'
 	export default {
 		components: {
 			uniIcons,
 			uniNavBar,
 			auditUser,
-			auditProject
+			auditProject,
+			auditProcess
 		},
 		computed: {
 			...mapGetters(['themeBgColor', 'darkMode']),
@@ -60,9 +62,10 @@
 					name: this.$t('UnApproval')
 				}, {
 					name: this.$t('Approvaled')
-				}, {
-					name: this.$t('ViewApproval')
-				}]
+				}//, {
+					//name: this.$t('ViewApproval')
+				//}
+				]
 			}
 		},
 		data() {

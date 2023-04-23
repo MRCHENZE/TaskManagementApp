@@ -17,7 +17,6 @@
         },
         /* 模块配置 */
         "modules" : {
-            "Push" : {},
             "Webview-x5" : {}
         },
         "compatible" : {
@@ -74,7 +73,9 @@
                                 "xhdpi" : "unpackage/res/icons/48x48.png",
                                 "xxhdpi" : "unpackage/res/icons/72x72.png"
                             }
-                        }
+                        },
+                        "version" : "2",
+                        "offline" : false
                     }
                 },
                 "ad" : {}
@@ -175,7 +176,7 @@
             "disableHostCheck" : true,
             "proxy" : {
                 "/taskmanagement" : {
-                    "target" : "http://1.15.241.188:8069",
+                    "target" : "http://49.232.145.209:8069",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {

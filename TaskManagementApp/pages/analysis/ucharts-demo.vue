@@ -48,17 +48,21 @@
 			this.getServerData();
 		},
 		methods: {
-			getServerData() {
-				console.log(demoData.data)
-				let Column = {
-					categories: [],
-					series: []
-				};
-				//这里我后台返回的是数组，所以用等于，如果您后台返回的是单条数据，需要push进去
-				Column.categories = demoData.data.ColumnB.categories;
-				Column.series = demoData.data.ColumnB.series;
-				_self.textarea = JSON.stringify(demoData.data.ColumnB);
-				_self.showColumn("canvasColumn", Column);
+			getServerData() {	
+				this.$minApi.getLastYearTasks().then(res => {
+					// 接口返回的当前页数据列表 (数组)
+					if(res.result){
+						let Column = {
+							categories: [],
+							series: []
+						};	
+						//这里我后台返回的是数组，所以用等于，如果您后台返回的是单条数据，需要push进去
+						Column.categories = res.result.data.ColumnB.categories;
+						Column.series = res.result.data.ColumnB.series;
+						_self.textarea = JSON.stringify(res.result.data.ColumnB);
+						_self.showColumn("canvasColumn", Column);
+					}
+				})
 			},
 			showColumn(canvasId, chartData) {
 				canvaColumn = new uCharts({

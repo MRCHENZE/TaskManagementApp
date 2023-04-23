@@ -36,6 +36,16 @@ export default {
 				return  minRequest.post('/taskmanagement/getaccount',param)
 			}
 		},
+		//获取当月任务情况
+		getCurrentMonthTasks(){
+			return minRequest.post('/taskmanagement/getcurrentmonthinfo',{})
+		},
+		getLastYearTasks(){
+			return minRequest.post('/taskmanagement/getlastyeartaskinfo',{})
+		},
+		getUnfinishedTaskInfo(params){
+			return minRequest.post('/taskmanagement/getunfinishedtaskinfo',params)
+		},
 		userPwdModify(params) {
 			return minRequest.post('/post/user/pwd/modify', params)
 		},

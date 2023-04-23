@@ -1,13 +1,6 @@
 <template>
 	<view>
 		<uni-nav-bar :fixed="true" color="#333333" :background-color="themeBgColor" :border="false">
-			<view class="input-view">
-				<uni-icons type="search" size="22" color="#666666" />
-				<input v-model="searchVal" confirm-type="search" class="input" type="text" placeholder="搜索项目" @confirm="search">
-				<uni-icons :color="'#999999'" v-if="searchVal!==''" class="icon-clear" type="clear" size="22" @click="clear" />
-			</view>
-		</uni-nav-bar>
-		<uni-nav-bar :fixed="true" color="#333333" :background-color="themeBgColor" :border="false">
 			<scroll-view scroll-x scroll-with-animation :scroll-left="scrollLeft" style="z-index: 9999;">
 				<view class="tui-tabs-view tui-tabs-relative text-white" style="height:80rpx;padding:0 30rpx;top:auto" :style="{backgroundColor:themeBgColor}">
 					<view v-for="(item, index) in tabbar" :key="index" class="tui-tabs-item" style="width:50%" @tap.stop="swichNav(index)">
@@ -18,10 +11,15 @@
 				</view>
 			</scroll-view>
 		</uni-nav-bar>
-		<swiper :class="darkMode?'custom-dark':'custom-light'" class="tab-content" :style="{height:winHeight+'px'}">
+		<swiper :class="darkMode?'custom-dark':'custom-light'" class="tab-content" :current="currentTab" duration="300" @change="switchTab" :style="{height:winHeight+'px'}">
 			<swiper-item>
 				<scroll-view scroll-y class="scoll-y">
-					<project-list ref="projectListRef"></project-list>
+					<project-list ref="auditProjectRef"></project-list>
+				</scroll-view>
+			</swiper-item>
+			<swiper-item>
+				<scroll-view scroll-y class="scoll-y">
+					<project-list ref="auditUserRef"></project-list>
 				</scroll-view>
 			</swiper-item>
 		</swiper>
@@ -32,7 +30,8 @@
 	import { mapGetters } from 'vuex'
 	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
-	import projectList from '@/pages/project/project-list.vue'
+	import projectList from './report/project-list'
+	import md5 from '@/common/lib/md5.min.js'
 	export default {
 		components: {
 			uniIcons,
@@ -51,9 +50,8 @@
 		},
 		data() {
 			return {
-				searchVal: '',
-				// 窗口高度
-				winHeight: "",
+				bgColor: '#FFFFFF',
+				winHeight: "", // 窗口高度
 				currentTab: 0, // 预设当前项的值
 				scrollLeft: 0, // tab标题的滚动条位置
 				searchVal: ''
@@ -64,19 +62,45 @@
 			    title: this.$t('Project')
 			})
 			this.setNavBarColor()
+			this.setDarkMode()
 		},
-		onShow() {
-			this.setNavBarColor()
+		watch: {
+			themeBgColor() {
+				this.setNavBarColor()
+			},
+			darkMode() {
+				this.setDarkMode()
+			}
 		},
 		onLoad() {
 			//  高度自适应
 			uni.getSystemInfo({
 				success: res => {
 					this.winHeight = res.windowHeight
+					this.winWidth = res.windowWidth
+					this.checkCor()
 				}
 			})
 		},
+		onShow(e) {
+			// setNavBar
+			this.setNavBarColor()
+			// pages
+			let pages = getCurrentPages()
+			let currPage = pages[pages.length - 1]
+			if (currPage.isDoRefresh === true) {
+				currPage.isDoRefresh = false
+				this.search()
+			}
+		},
 		methods: {
+			setDarkMode() {
+				this.darkMode ? uni.setTabBarStyle({
+				  backgroundColor: '#2a2b2d'
+				}) : uni.setTabBarStyle({
+					backgroundColor: '#ffffff'
+				})
+			},
 			setNavBarColor() {
 				// navBar-bg-color
 				uni.setNavigationBarColor({
@@ -98,7 +122,7 @@
 			},
 			// 判断当前滚动超过一屏时，设置tab标题滚动条。
 			checkCorSwitchTab() {
-				if (this.currentTab > 3) {
+				if (this.currentTab > 2) {
 					// 这里距离按实际计算
 					this.scrollLeft = 300
 				} else {
@@ -127,7 +151,11 @@
 				}
 			},
 			search() {
-				this.$refs.projectListRef.queryByName(this.searchVal)
+				if (this.currentTab == 0) {
+					this.$refs.auditProjectRef.queryByName(this.searchVal)
+				} else if (this.currentTab == 1) {
+					this.$refs.auditUserRef.queryByName(this.searchVal)
+				}
 			},
 			clear() {
 				this.searchVal = ''
@@ -147,16 +175,16 @@
 		justify-content: space-between;
 		z-index: 9999;
 	}
-	
+
 	.tui-tabs-relative {
 		position: relative;
 	}
-	
+
 	.tui-tabs-fixed {
 		position: fixed;
 		left: 0;
 	}
-	
+
 	.tui-tabs-fixed::before,
 	.tui-tabs-relative::before {
 		content: '';
@@ -168,21 +196,21 @@
 		right: 0;
 		left: 0;
 	}
-	
+
 	.tui-unlined::before {
 		border-bottom: 0 !important
 	}
-	
+
 	.tui-tabs-item {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
-	
+
 	.tui-tabs-disabled {
 		opacity: .6;
 	}
-	
+
 	.tui-tabs-title {
 		display: flex;
 		align-items: center;
@@ -190,11 +218,11 @@
 		position: relative;
 		z-index: 2;
 	}
-	
+
 	.tui-tabs-active {
 		transition: all 0.15s ease-in-out;
 	}
-	
+
 	.tui-tabs-slider {
 		border-radius: 40rpx;
 		position: absolute;
@@ -202,6 +230,6 @@
 		transition: all 0.15s ease-in-out;
 		z-index: 0;
 	}
-	
+
 	/* tab end */
 </style>

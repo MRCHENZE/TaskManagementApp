@@ -7,7 +7,7 @@
 					<view class="title">填写处理反馈(非必填)</view>
 					<textarea v-model="auditIdea" class="idea-textarea" placeholder="请输入" />
 				</view> -->
-				<view class="margin-left-sm">填写处理反馈(非必填)</view>
+				<view class="margin-left-sm">填写审批意见(非必填)</view>
 				<view class="cu-form-group idea-textarea">
 					<textarea maxlength="-1" v-model="auditIdea" placeholder="请输入"></textarea>
 				</view>
